@@ -1,0 +1,16 @@
+name: Read Django Migrtation file
+author: debugger22
+description: 'Read Django Migration files content'
+branding:
+  icon: 'file'
+  color: yellow
+inputs:
+  files:
+    description: 'File paths'
+    required: true
+outputs:
+  content:
+    description: 'Concatenated content of the files'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
