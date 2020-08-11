@@ -8,6 +8,10 @@ inputs:
   files:
     description: 'File paths'
     required: true
+  pattern:
+    description: 'File pattern to match using RegEx'
+    required: false
+    default: 'migrations'
 outputs:
   content:
     description: 'Concatenated content of the files'

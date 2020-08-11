@@ -1,24 +1,39 @@
-'use strict'
+"use strict";
 
-const core = require('@actions/core');
-const { promises: fs } = require('fs');
+const core = require("@actions/core");
+const { promises: fs } = require("fs");
 
-const main = async () => {
-  const filePaths = JSON.parse(core.getInput('files'));
-  console.log(filePaths);
-  var output = "";
+const main = () => {
+  const filePaths = JSON.parse(core.getInput("files"));
+  const regularExpression = core.getInput("pattern");
 
-  filePaths.forEach(async(filePath) => {
+  const pattern = new RegExp(regularExpression);
 
-    if(filePath.includes("migrations")){
-      output += `========================== ${filePath} ==========================\n\n`;
-      const content = await fs.readFile(process.env.GITHUB_WORKSPACE + "/" + filePath, 'utf8');
+  console.log(filePaths, pattern);
+
+  const matchingFilePaths = filePaths
+  .filter((filePath) => pattern.test(filePath));
+
+  return Promise.all([
+    Promise.resolve(matchingFilePaths),
+    ...matchingFilePaths.map((filePath) => fs.readFile(process.env.GITHUB_WORKSPACE + "/" + filePath, "utf8"))
+  ]);
+
+};
+
+main()
+  .then((response) => {
+
+    const [matchingFilePaths, ...fileContents] = response;
+
+    let output = '';
+
+    fileContents.forEach((content, index) => {
+      output += `========================== ${matchingFilePaths[index]} ==========================\n\n`;
       output += content + "\n\n";
+    })
 
-    }
+    core.setOutput("content", output);
 
-  });
-  core.setOutput('content', output);
-}
-
-main().catch(err => core.setFailed(err.message));
+  })
+  .catch((err) => core.setFailed(err.message));
