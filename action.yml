@@ -1,4 +1,4 @@
-name: Read Django Migrtation file
+name: Read Migration files action
 author: debugger22
 description: 'Read Django Migration files content'
 branding:
