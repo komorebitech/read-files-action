@@ -4,8 +4,8 @@ const core = require('@actions/core');
 const { promises: fs } = require('fs');
 
 const main = async () => {
-  const filePaths = core.getInput('files').split(" ");
-
+  const filePaths = JSON.parse(core.getInput('files'));
+  console.log(filePaths);
   var output = "";
 
   filePaths.forEach(async(filePath) => {

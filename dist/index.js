@@ -60,8 +60,8 @@ const core = __webpack_require__(470);
 const { promises: fs } = __webpack_require__(747);
 
 const main = async () => {
-  const filePaths = core.getInput('files').split(" ");
-
+  const filePaths = JSON.parse(core.getInput('files'));
+  console.log(filePaths);
   var output = "";
 
   filePaths.forEach(async(filePath) => {
