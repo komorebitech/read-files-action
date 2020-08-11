@@ -11,6 +11,6 @@ jobs:
           npm ci
           npm run build
       - uses: ./
-        id: package
+        id: migrations
         with:
-          path: package.json
+          path: migrations/test.sql
