@@ -1,25 +1,36 @@
-'use strict'
+"use strict";
 
-const core = require('@actions/core')
-const { promises: fs } = require('fs')
+const core = require("@actions/core");
+const { promises: fs } = require("fs");
 
-const main = async () => {
-  const filePaths = JSON.parse(core.getInput('files'))
-  const regularExpression = JSON.parse(core.getInput('pattern'))
-  
+const main = () => {
+  const filePaths = JSON.parse(core.getInput("files"));
+  const regularExpression = JSON.parse(core.getInput("pattern"));
+
   const pattern = new RegExp(regularExpression);
 
-  console.log(filePaths, pattern)
-  var output = ''
+  console.log(filePaths, pattern);
 
-  filePaths.forEach(async filePath => {
-    if (pattern.test(filePath)) {
-      output += `========================== ${filePath} ==========================\n\n`
-      const content = await fs.readFile(filePath, 'utf8')
-      output += content + '\n\n'
-    }
+  return Promise.all(
+    filePaths
+      .filter((filePath) => pattern.test(filePath))
+      .map((filePath) => {
+        fs.readFile(process.env.GITHUB_WORKSPACE + "/" + filePath, "utf8");
+      })
+  );
+
+};
+
+main()
+  .then((response) => {
+    let output = '';
+
+    response.forEach(content => {
+      output += `========================== ${filePath} ==========================\n\n`;
+      output += content + "\n\n";
+    })
+
+  core.setOutput("content", output);
+
   })
-  core.setOutput('content', output)
-}
-
-main().catch(err => core.setFailed(err.message))
+  .catch((err) => core.setFailed(err.message));
