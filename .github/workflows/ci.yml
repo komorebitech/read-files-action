@@ -13,6 +13,6 @@ jobs:
       - uses: ./
         id: migrations
         with:
-          files: ['migrations/test.sql', 'package.json']
+          files: "migrations/test.sql package.json"
       - name: Echo output
         run: echo ${{ steps.migrations.outputs.content }}

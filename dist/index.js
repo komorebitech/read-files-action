@@ -60,7 +60,7 @@ const core = __webpack_require__(470);
 const { promises: fs } = __webpack_require__(747);
 
 const main = async () => {
-  const filePaths = core.getInput('files');
+  const filePaths = core.getInput('files').split(" ");
   const output = "";
   for (var filePath in filePaths){
     if(filePaths.includes("migrations")){
