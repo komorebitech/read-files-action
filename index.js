@@ -11,20 +11,25 @@ const main = () => {
 
   console.log(filePaths, pattern);
 
-  return Promise.all(
-    filePaths
-      .filter((filePath) => pattern.test(filePath))
-      .map((filePath) => fs.readFile(process.env.GITHUB_WORKSPACE + "/" + filePath, "utf8"))
-  );
+  const matchingFilePaths = filePaths
+  .filter((filePath) => pattern.test(filePath));
+
+  return Promise.all([
+    Promise.resolve(matchingFilePaths),
+    ...matchingFilePaths.map((filePath) => fs.readFile(process.env.GITHUB_WORKSPACE + "/" + filePath, "utf8"))
+  ]);
 
 };
 
 main()
   .then((response) => {
+
+    const matchingFilePaths = response[0];
+
     let output = '';
 
-    response.forEach(content => {
-      output += `========================== ${filePath} ==========================\n\n`;
+    response.forEach((content, index) => {
+      output += `========================== ${matchingFilePaths[index]} ==========================\n\n`;
       output += content + "\n\n";
     })
 
