@@ -9,8 +9,6 @@ const main = () => {
 
   const pattern = new RegExp(regularExpression);
 
-  console.log(filePaths, pattern);
-
   const matchingFilePaths = filePaths
   .filter((filePath) => pattern.test(filePath));
 

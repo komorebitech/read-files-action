@@ -16,4 +16,4 @@ jobs:
           files: '["migrations/test.sql", "package.json"]'
           pattern: 'migrations'
       - name: Echo output
-        run: echo "{{ steps.migrations.outputs.content }}"
+        run: echo "${{ steps.migrations.outputs.content }}"

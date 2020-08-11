@@ -11,7 +11,7 @@ inputs:
   pattern:
     description: 'File pattern to match using RegEx'
     required: false
-    default: ''
+    default: '*'
 outputs:
   content:
     description: 'Concatenated content of the files'

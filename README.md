@@ -12,7 +12,7 @@ steps:
     with:
       files: '["/migrations/001_initial.py", "/migrations/002_auto_2020_08_11_545462.py"]'
   - name: Echo migrations
-    run: echo "{{ steps.migrations.outputs.content }}"
+    run: echo "${{ steps.migrations.outputs.content }}"
 ```
 
 ## License
