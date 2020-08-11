@@ -12,7 +12,7 @@ const main = async () => {
 
     if(filePath.includes("migrations")){
       output += `========================== ${filePath} ==========================\n\n`;
-      const content = await fs.readFile(filePath, 'utf8');
+      const content = await fs.readFile(process.env.GITHUB_WORKSPACE + "/" + filePath, 'utf8');
       output += content + "\n\n";
 
     }
