@@ -30,7 +30,7 @@ main()
       output += content + "\n\n";
     })
 
-  core.setOutput("content", output);
+    core.setOutput("content", output);
 
   })
   .catch((err) => core.setFailed(err.message));
