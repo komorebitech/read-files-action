@@ -1,6 +1,6 @@
-name: Read Migration files action
+name: Read files action
 author: debugger22
-description: 'Read Django Migration files content'
+description: 'Read files content'
 branding:
   icon: 'file'
   color: yellow
@@ -11,7 +11,7 @@ inputs:
   pattern:
     description: 'File pattern to match using RegEx'
     required: false
-    default: 'migrations'
+    default: ''
 outputs:
   content:
     description: 'Concatenated content of the files'
