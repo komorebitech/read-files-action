@@ -7,14 +7,16 @@ const main = async () => {
   const filePaths = core.getInput('files').split(" ");
   console.log(filePaths);
   var output = "";
-  filePaths.forEach(async(filePath) =>{
-    console.log(filePath);
+  filePaths.forEach(async(filePath) => {
+
     if(filePath.includes("migrations")){
       output += `==========================${filePath}==========================\n\n`;
       const content = await fs.readFile(filePath, 'utf8');
       output += content + "\n\n";
-      console.log(content);
+      console.log(output);
+
     }
+
   });
   core.setOutput('content', output);
 }
