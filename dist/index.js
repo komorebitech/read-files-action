@@ -63,7 +63,7 @@ const main = async () => {
   const filePaths = core.getInput('files').split(" ");
   console.log(filePaths);
   const output = "";
-  for (var filePath in filePaths){
+  filePaths.forEach(async(filePath) =>{
     console.log(filePath);
     if(filePaths.includes("migrations")){
       output += `==========================${filePath}==========================\n\n`;
@@ -71,7 +71,7 @@ const main = async () => {
       output += content + "\n\n";
       console.log(content);
     }
-  }
+  });
   core.setOutput('content', output);
 }
 
