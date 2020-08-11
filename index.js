@@ -24,11 +24,11 @@ const main = () => {
 main()
   .then((response) => {
 
-    const matchingFilePaths = response[0];
+    const [matchingFilePaths, ...fileContents] = response;
 
     let output = '';
 
-    response.forEach((content, index) => {
+    fileContents.forEach((content, index) => {
       output += `========================== ${matchingFilePaths[index]} ==========================\n\n`;
       output += content + "\n\n";
     })
