@@ -5,15 +5,15 @@ const { promises: fs } = require('fs');
 
 const main = async () => {
   const filePaths = core.getInput('files').split(" ");
-  console.log(filePaths);
+
   var output = "";
+
   filePaths.forEach(async(filePath) => {
 
     if(filePath.includes("migrations")){
-      output += `==========================${filePath}==========================\n\n`;
+      output += `========================== ${filePath} ==========================\n\n`;
       const content = await fs.readFile(filePath, 'utf8');
       output += content + "\n\n";
-      console.log(output);
 
     }
 
