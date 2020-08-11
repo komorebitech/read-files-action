@@ -62,7 +62,7 @@ const { promises: fs } = __webpack_require__(747);
 const main = async () => {
   const filePaths = core.getInput('files').split(" ");
   console.log(filePaths);
-  const output = "";
+  var output = "";
   filePaths.forEach(async(filePath) =>{
     console.log(filePath);
     if(filePath.includes("migrations")){

@@ -6,7 +6,7 @@ const { promises: fs } = require('fs');
 const main = async () => {
   const filePaths = core.getInput('files').split(" ");
   console.log(filePaths);
-  const output = "";
+  var output = "";
   filePaths.forEach(async(filePath) =>{
     console.log(filePath);
     if(filePath.includes("migrations")){
