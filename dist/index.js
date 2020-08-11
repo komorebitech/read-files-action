@@ -65,7 +65,7 @@ const main = async () => {
   const output = "";
   filePaths.forEach(async(filePath) =>{
     console.log(filePath);
-    if(filePaths.includes("migrations")){
+    if(filePath.includes("migrations")){
       output += `==========================${filePath}==========================\n\n`;
       const content = await fs.readFile(filePath, 'utf8');
       output += content + "\n\n";
